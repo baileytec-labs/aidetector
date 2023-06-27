@@ -1,0 +1,6 @@
+spacy
+torch
+torchtext
+halo
+pandas
+scikit-learn
