@@ -18,7 +18,7 @@ print(find_packages())
 
 setup(
     name='aidetector',
-    version='0.1.1',
+    version='0.0.1',
     packages=find_packages(),
     include_package_data=True,
     entry_points={
@@ -33,7 +33,7 @@ setup(
     python_requires=">=3.9",
     classifiers=[
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: Apache License",
+        'License :: OSI Approved :: Apache Software License',
         "Operating System :: OS Independent",
     ],
 install_requires=[
