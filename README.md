@@ -40,7 +40,7 @@ aidetector train --datafile [path_to_data] --modeloutputfile [path_to_model] --v
 To make predictions with a trained model, you need to provide the text you want to classify. The script takes the following command-line arguments:
 
 ```
-aidetection infer --modelfile [path_to_trained_model] --vocabfile [path_to_vocab] --text [text_to_classify] --tokenmodel [SpaCy_model] --threshold [probability_threshold_for_classification] --download [flag_to_download_SpaCy_model]
+aidetector infer --modelfile [path_to_trained_model] --vocabfile [path_to_vocab] --text [text_to_classify] --tokenmodel [SpaCy_model] --threshold [probability_threshold_for_classification] --download [flag_to_download_SpaCy_model]
 ```
 
 
