@@ -17,6 +17,19 @@ import torch.optim as optim
 import pickle
 
 
+def detect_delimiter(filename, col1, col2):
+    with open(filename, 'r') as f:
+        first_line = f.readline()
+    parts = first_line.split(col1)
+    if len(parts) < 2:
+        raise ValueError(f"Couldn't find column name {col1} in the first line of the file")
+    second_part = parts[1]
+    parts = second_part.split(col2)
+    if len(parts) < 2:
+        raise ValueError(f"Couldn't find column name {col2} in the first line of the file")
+    delimiter = parts[0]
+    return delimiter
+
 
 #Data loading...
 def load_data(inputfile, percentsplit=0.2,classificationlabel='classification',textlabel='text'):
@@ -32,9 +45,10 @@ def load_data(inputfile, percentsplit=0.2,classificationlabel='classification',t
     Returns:
     tuple: Four pandas Series objects for training text, testing text, training labels, and testing labels.
     """
-
+    delimeter=detect_delimiter(inputfile,classificationlabel,textlabel)
     df = pd.read_csv(
-        inputfile
+        inputfile,
+        sep=delimeter
     )
     traintxt, testtxt, trainlbl, testlbl = train_test_split(
         df[textlabel],
