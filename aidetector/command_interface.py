@@ -59,7 +59,7 @@ def main():
     args = parser.parse_args()
 
     if args.mode == 'train':
-        tokenizer=get_tokenizer(args.tokenmodel)
+        tokenizer=get_tokenizer(args.tokenmodel,args.download)
         traintxt, test_text, train_labels, test_labels = load_data(args.datafile,percentsplit=args.percentsplit,classificationlabel=args.classificationlabel,textlabel=args.textlabel)
         vocab, trainseqs, testseqs = tokenize_data(
             traintxt,
