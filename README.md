@@ -81,7 +81,7 @@ testtext="Is this written by AI?"
 
 
 model.load_state_dict(torch.load("./mymodelfile.model"))
-isai=check_input(
+isai,aiprobability=check_input(
     model,
     vocab,
     testtext,

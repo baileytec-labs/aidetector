@@ -42,7 +42,7 @@ def main():
     parser_train.add_argument('--lowerbound',type=float,required=False,default=0.4,help="The lower bound for your Training Validation Loss (defaoult 0.4).")
     parser_train.add_argument('--upperbound',type=float,required=False,default=0.6,help="The upper bound for your Training Validation Loss (default 0.6)")
     parser_train.add_argument('--epochs',type=int,required=False,default=100,help="The maximum number of epochs for training the model (default 100)")
-
+    parser_train.add_argument('--existingmodel',type=str,required=False,default=None,help="Specify the path to the existing model you would like to finetune.")
 
     parser_train.set_defaults(download=False) 
 
@@ -68,6 +68,8 @@ def main():
             
         )
         model = AiDetector(len(vocab))
+        if args.existingmodel is not None:
+            model.load_state_dict(torch.load(args.existingmodel))
         # Pass a sample input through the model to compute the size of the convolutional layer output
         _ = model(torch.zeros(1, trainseqs.size(1)).long())
         model.add_fc_layer()
@@ -104,7 +106,7 @@ def main():
         model = AiDetector(len(vocab))
         
         model.load_state_dict(torch.load(args.modelfile))
-        isai=check_input(
+        isai,aiprobability=check_input(
             model,
             vocab,
             args.text,
@@ -113,8 +115,10 @@ def main():
         )
         if isai:
             print("This was written by AI")
+            print("Confidence: "+str(float(aiprobability)))
         else:
             print("This was written by a human.")
+            print("Confidence: "+str(float(1-aiprobability)))
     else:
         parser.print_help()
 

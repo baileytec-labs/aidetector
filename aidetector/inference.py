@@ -38,9 +38,9 @@ def check_input(model, vocab, text, tokenizer, threshold=0.5):
 
     if ai_probability > threshold:
         #it's probably AI
-        return 1
+        return 1,ai_probability
     else:
-        return 0
+        return 0,ai_probability
 
 def load_vocab(vocabfile):
     """
